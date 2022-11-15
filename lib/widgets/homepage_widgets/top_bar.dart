@@ -1,15 +1,27 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:gotur/widgets/homepage_widgets/adresses_popup.dart';
+import 'package:gotur/bloc/address_bloc.dart';
+import 'package:gotur/widgets/homepage_widgets/addresses_popup.dart';
 
 class TopBar extends StatelessWidget {
+  AsyncSnapshot snapshot;
+  TopBar(this.snapshot);
   @override
   Widget build(BuildContext context) {
+    String addressText;
+    int i ;
+    for(i = 0; i<snapshot.data.length;i++){
+      if(snapshot.data[i].selectedAddress == 1){
+        break;
+      }
+    }
+
     return Container(
         padding: EdgeInsets.zero,
         color: Colors.amberAccent,
         height: 50.0,
+
         child: Row(
           children: [
             Container(
@@ -17,7 +29,7 @@ class TopBar extends StatelessWidget {
               width: 320,
               child: ElevatedButton(
                 onPressed: () {
-                  downPopupAdressMenu(context);
+                  downPopupAddressMenu(context);
                 },
                 child: Row(
                   children: [
@@ -27,7 +39,7 @@ class TopBar extends StatelessWidget {
                         overflow: TextOverflow.ellipsis,
                         textAlign: TextAlign.left,
                         text: TextSpan(
-                          text: 'Ev,  ',
+                          text: snapshot.data[i].addressType+"  ",
                           style: TextStyle(
                               color: Colors.purple,
                               fontWeight: FontWeight.bold),
@@ -35,7 +47,7 @@ class TopBar extends StatelessWidget {
                           children: <TextSpan>[
                             TextSpan(
                                 text:
-                                    'Pendik İstanbul',
+                                snapshot.data[i].addressText,
                                 style: TextStyle(
                                     color: Colors.black,
                                     fontWeight: FontWeight.normal)),
@@ -91,7 +103,7 @@ class TopBar extends StatelessWidget {
         ));
   }
 
-  void downPopupAdressMenu(BuildContext context) {
+  void downPopupAddressMenu(BuildContext context) {
     showModalBottomSheet(
       isScrollControlled: true,
       shape: RoundedRectangleBorder(
@@ -155,11 +167,11 @@ class TopBar extends StatelessWidget {
             ),
             Divider(),
             Container(
-              child: AdressesPopup(),
+              child: AddressesPopup(snapshot),
               constraints: BoxConstraints(maxHeight: 500),
             ),
             Container(
-              height: 88,
+              height: 72,
               child: GestureDetector(
                 onTap: (){
                   print("sa");
@@ -192,4 +204,6 @@ class TopBar extends StatelessWidget {
       ),
     );
   }
+
+
 }

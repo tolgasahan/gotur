@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:gotur/bloc/address_bloc.dart';
 import 'package:gotur/bloc/category_bloc.dart';
 import 'package:gotur/widgets/bottom_bar.dart';
 import 'package:gotur/widgets/cart_button.dart';
@@ -21,14 +22,14 @@ class MainScreen extends StatelessWidget {
           centerTitle: true,
           elevation: 0,
           actions: <Widget>[
-           CartButton(false)
+           CartButton(true)
           ],
         ),
         resizeToAvoidBottomInset: false,
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            TopBar(),
+            buildAddressList(),
             Expanded(
               child: buildProductList(),
             ),
@@ -43,7 +44,19 @@ class MainScreen extends StatelessWidget {
           ],
         ));
   }
-
+  Widget buildAddressList() {
+    return StreamBuilder(
+      initialData: addressBloc.getAll(),
+      stream: addressBloc.getStream,
+      builder: (context, snapshoot) {
+        return snapshoot.data.length > 0
+            ? TopBar(snapshoot)
+            : Center(
+          child: Text("Yükleniyor."),
+        );
+      },
+    );
+  }
   Widget buildProductList() {
     return StreamBuilder(
       initialData: categoryBloc.getAll(),

@@ -19,6 +19,7 @@ class CategoryService{
     products.add(Category(2, "https://www.thecountrycook.net/wp-content/uploads/2021/08/thumbnail-Stove-Top-Mac-Cheese-720x720.jpg", "Başka Ürünler"));
     products.add(Category(3, "https://www.thecountrycook.net/wp-content/uploads/2021/08/thumbnail-Stove-Top-Mac-Cheese-720x720.jpg", "Deneme Ürünler"));
     products.add(Category(4, "https://www.thecountrycook.net/wp-content/uploads/2021/08/thumbnail-Stove-Top-Mac-Cheese-720x720.jpg", "Nasıl Ürünler"));
+    products.add(Category(5, "https://www.thecountrycook.net/wp-content/uploads/2021/08/thumbnail-Stove-Top-Mac-Cheese-720x720.jpg", "Güzel Ürünler"));
 
 
     return products;
