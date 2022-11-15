@@ -1,16 +1,16 @@
 # gotur
 
-A new Flutter project.
+My New Flutter Project
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+Im trying make a trade app like getir.
+My first goal making interface.
+If i can handle to make UI i will use BloC pattern and SQFlite database.
 
-A few resources to get you started if this is your first Flutter project:
+Home page:
+![main screen](https://i.hizliresim.com/nzq3s94.png)
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Adress Page:
+![add adress](https://i.hizliresim.com/hlscg1l.png)
