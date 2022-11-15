@@ -53,7 +53,6 @@ class TopBar extends StatelessWidget {
                   ],
                 ),
                 style: ElevatedButton.styleFrom(
-                    elevation: 0,
                     backgroundColor: Colors.white,
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.only(

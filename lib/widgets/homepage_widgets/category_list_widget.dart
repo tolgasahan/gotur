@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:gotur/widgets/homepage_widgets/category_list_widget_row.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
 class CategoryListWidget extends StatelessWidget{
+  AsyncSnapshot snapshot;
+  CategoryListWidget(this.snapshot);
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -43,9 +45,9 @@ class CategoryListWidget extends StatelessWidget{
                 mainAxisSpacing: 10.0,
                 crossAxisSpacing:10.0,
               ),
-              itemCount: 20,
+              itemCount: snapshot.data.length,
               itemBuilder: (context, index) {
-                return CategoryListWidgetRow();
+                return CategoryListWidgetRow(snapshot.data,index);
               },
             ),
           ),

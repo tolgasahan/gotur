@@ -8,7 +8,7 @@ class AdressesPopup extends StatelessWidget{
     return ListView.builder(
       scrollDirection: Axis.vertical,
       shrinkWrap: true,
-      itemCount: 6,
+      itemCount: 3,
       itemBuilder: (context,index){
         return Column(
           mainAxisSize: MainAxisSize.min,
