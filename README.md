@@ -15,3 +15,11 @@ Home page:
 Adress Page:
 ![add adress](https://i.hizliresim.com/hlscg1l.png)
 
+##
+## Update
+
+BloC pattern added and product page created.
+App still static. My next step complete pages and add database.
+
+Pages:
+![pages](https://i.hizliresim.com/ouvd5ha.png)
