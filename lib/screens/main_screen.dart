@@ -9,9 +9,11 @@ import 'package:gotur/widgets/homepage_widgets/top_bar.dart';
 
 class MainScreen extends StatelessWidget {
   @override
+
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          backgroundColor: Colors.purple,
           title: Text(
             "götür",
             style: TextStyle(
@@ -44,7 +46,7 @@ class MainScreen extends StatelessWidget {
           ],
         ));
   }
-  Widget buildAddressList() {
+Widget buildAddressList(){
     return StreamBuilder(
       initialData: addressBloc.getAll(),
       stream: addressBloc.getStream,
@@ -56,7 +58,7 @@ class MainScreen extends StatelessWidget {
         );
       },
     );
-  }
+}
   Widget buildProductList() {
     return StreamBuilder(
       initialData: categoryBloc.getAll(),

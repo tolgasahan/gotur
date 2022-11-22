@@ -4,15 +4,20 @@ import 'package:flutter/material.dart';
 import 'package:gotur/bloc/address_bloc.dart';
 import 'package:gotur/widgets/homepage_widgets/addresses_popup.dart';
 
-class TopBar extends StatelessWidget {
+class TopBar extends StatefulWidget {
   AsyncSnapshot snapshot;
   TopBar(this.snapshot);
+
+  @override
+  State<TopBar> createState() => _TopBarState();
+}
+
+class _TopBarState extends State<TopBar> {
   @override
   Widget build(BuildContext context) {
-    String addressText;
     int i ;
-    for(i = 0; i<snapshot.data.length;i++){
-      if(snapshot.data[i].selectedAddress == 1){
+    for(i = 0; i<widget.snapshot.data.length;i++){
+      if(widget.snapshot.data[i].selectedAddress == 1){
         break;
       }
     }
@@ -39,7 +44,7 @@ class TopBar extends StatelessWidget {
                         overflow: TextOverflow.ellipsis,
                         textAlign: TextAlign.left,
                         text: TextSpan(
-                          text: snapshot.data[i].addressType+"  ",
+                          text: widget.snapshot.data[i].addressType+"  ",
                           style: TextStyle(
                               color: Colors.purple,
                               fontWeight: FontWeight.bold),
@@ -47,7 +52,7 @@ class TopBar extends StatelessWidget {
                           children: <TextSpan>[
                             TextSpan(
                                 text:
-                                snapshot.data[i].addressText,
+                                widget.snapshot.data[i].addressText,
                                 style: TextStyle(
                                     color: Colors.black,
                                     fontWeight: FontWeight.normal)),
@@ -167,15 +172,13 @@ class TopBar extends StatelessWidget {
             ),
             Divider(),
             Container(
-              child: AddressesPopup(snapshot),
+              child: AddressesPopup(widget.snapshot),
               constraints: BoxConstraints(maxHeight: 500),
             ),
             Container(
               height: 72,
               child: GestureDetector(
-                onTap: (){
-                  print("sa");
-                },
+                onTap: (){},
                 child: Row(
                   children: [
                     Icon(
@@ -202,8 +205,6 @@ class TopBar extends StatelessWidget {
           ],
         ),
       ),
-    );
+    ).then((value) => setState((){}));
   }
-
-
 }

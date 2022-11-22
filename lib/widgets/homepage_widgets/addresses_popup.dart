@@ -38,7 +38,7 @@ class AddressesPopup extends StatelessWidget{
                   snapshot.data[i].selectedAddress = 0;
                 }
                 snapshot.data[index].selectedAddress = 1;
-                Navigator.pop(context);
+                Navigator.pop(context,snapshot.data[index]);
               },
               activeColor: Colors.purple,
               selected: false,
