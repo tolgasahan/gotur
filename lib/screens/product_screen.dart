@@ -49,7 +49,7 @@ class ProductScreen extends StatelessWidget {
                           curve: Curves.decelerate);
                     },
                     style: ButtonStyle(overlayColor: MaterialStateProperty.all(Colors.transparent), splashFactory: NoSplash.splashFactory,),
-                    child: Text("saas",style: TextStyle(color: Colors.white),),
+                    child: Text("Ürünler",style: TextStyle(color: Colors.white),),
 
                   ),)
                   ,
