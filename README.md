@@ -1,6 +1,6 @@
 # gotur
 
-My New Flutter Project
+My new work on Flutter/Dart
 
 ## Getting Started
 
