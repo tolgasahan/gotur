@@ -8,7 +8,7 @@ Im trying make a trade app like getir.
 My first goal making interface.
 If i can handle to make UI i will use BloC pattern and SQFlite database.
 
-Home page:
+Pages:
 ![pages](https://i.hizliresim.com/anaf61t.png)
 
 
