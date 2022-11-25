@@ -140,7 +140,7 @@ class ProductScreen extends StatelessWidget {
                           itemBuilder: (context, index) {
                             return Column(
                               children: [
-                                Container(margin: EdgeInsets.symmetric(horizontal: 10,vertical: 10),child: Text("Yeni ürünler 1",style: TextStyle(color: Colors.grey[700],fontWeight: FontWeight.w400),),alignment: FractionalOffset.bottomLeft,),
+                                Container(margin: EdgeInsets.symmetric(horizontal: 10,vertical: 10),child: Text("Yeni ürünler ${index+1}",style: TextStyle(color: Colors.grey[700],fontWeight: FontWeight.w400),),alignment: FractionalOffset.bottomLeft,),
                                 Container(
                                     decoration: BoxDecoration(
                                       boxShadow: <BoxShadow>[
