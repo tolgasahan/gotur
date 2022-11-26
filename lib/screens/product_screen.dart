@@ -4,11 +4,22 @@ import 'package:gotur/widgets/bottom_bar.dart';
 import 'package:gotur/widgets/cart_button.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
-class ProductScreen extends StatelessWidget {
+class ProductScreen extends StatefulWidget {
+  @override
+  State<ProductScreen> createState() => _ProductScreenState();
+}
+
+class _ProductScreenState extends State<ProductScreen> {
   @override
   PageController _controller = PageController(
     initialPage: 0,
   );
+
+  int selectedIndex = 0;
+
+  var selectedIndexColor;
+
+  ItemScrollController _scrollVertical = ItemScrollController();
 
   ItemScrollController _scrollController = ItemScrollController();
 
@@ -36,56 +47,52 @@ class ProductScreen extends StatelessWidget {
             color: Colors.purpleAccent,
             height: 40,
             width: double.infinity,
-            alignment: Alignment.centerLeft,
-            child: SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                children: [
-                  SizedBox(
-                    child: TextButton(
-                      onPressed: () {
-                        _controller.animateToPage(0,
-                            duration: Duration(milliseconds: 500),
-                            curve: Curves.decelerate);
-                      },
-                      style: ButtonStyle(
-                        overlayColor:
-                            MaterialStateProperty.all(Colors.transparent),
-                        splashFactory: NoSplash.splashFactory,
-                      ),
-                      child: Text(
-                        "Ürünler",
-                        style: TextStyle(color: Colors.white),
-                      ),
-                    ),
-                  ),
-                  ElevatedButton(
-                      onPressed: () {
-                        _controller.animateToPage(1,
-                            duration: Duration(milliseconds: 500),
-                            curve: Curves.decelerate);
-                      },
-                      child: Text("Ürünler")),
-                  ElevatedButton(
-                      onPressed: () {
-                        _controller.animateToPage(2,
-                            duration: Duration(milliseconds: 500),
-                            curve: Curves.decelerate);
-                      },
-                      child: Text("Ürünler")),
-                  ElevatedButton(
-                      onPressed: () {
-                        _controller.animateToPage(3,
-                            duration: Duration(milliseconds: 500),
-                            curve: Curves.decelerate);
-                      },
-                      child: Text("Ürünler"))
-                ],
-              ),
-            ),
+            child: ScrollablePositionedList.builder(
+                padding: EdgeInsets.symmetric(horizontal: 10),
+                shrinkWrap: true,
+                itemScrollController: _scrollVertical,
+                itemCount: 20,
+                scrollDirection: Axis.horizontal,
+                itemBuilder: (context, index) {
+                  if (selectedIndex == index) {
+                    selectedIndexColor = Colors.yellowAccent;
+                  } else {
+                    selectedIndexColor = Colors.transparent;
+                  }
+                  return Container(
+                    padding: EdgeInsets.only(bottom: 2),
+                    child: ElevatedButton(
+                        style: ButtonStyle(
+                            backgroundColor:
+                                MaterialStateProperty.all(Colors.purpleAccent),
+                            overlayColor:
+                                MaterialStateProperty.all(Colors.purpleAccent),
+                            elevation: MaterialStateProperty.all(0),
+                            shape: MaterialStateProperty.all(
+                                RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.zero))),
+                        onPressed: () {
+                          _controller.animateToPage(index,
+                              duration: Duration(milliseconds: 500),
+                              curve: Curves.decelerate);
+                        },
+                        child: Text("Ürünler ${index + 1}")),
+                    color: selectedIndexColor,
+                  );
+                }),
           ),
           Expanded(
             child: PageView(
+              onPageChanged: (index) {
+                setState(() {
+                  _scrollVertical.scrollTo(
+                      index: index,
+                      duration: Duration(milliseconds: 500),
+                      curve: Curves.decelerate,
+                      alignment: 0.40);
+                  selectedIndex = index;
+                });
+              },
               controller: _controller,
               children: [
                 Container(
@@ -126,9 +133,9 @@ class ProductScreen extends StatelessWidget {
                           decoration: BoxDecoration(
                             boxShadow: <BoxShadow>[
                               BoxShadow(
-                                  color: Colors.black54,
-                                  blurRadius: 15.0,
-                                  offset: Offset(0.0, 0.75))
+                                  color: Colors.black12,
+                                  blurRadius: 5,
+                                  offset: Offset(0.0, 0.5))
                             ],
                           )),
                       Expanded(
@@ -140,21 +147,30 @@ class ProductScreen extends StatelessWidget {
                           itemBuilder: (context, index) {
                             return Column(
                               children: [
-                                Container(margin: EdgeInsets.symmetric(horizontal: 10,vertical: 10),child: Text("Yeni ürünler ${index+1}",style: TextStyle(color: Colors.grey[700],fontWeight: FontWeight.w400),),alignment: FractionalOffset.bottomLeft,),
                                 Container(
-                                    decoration: BoxDecoration(
-                                      boxShadow: <BoxShadow>[
-                                        BoxShadow(
-                                            color: Colors.black12,
-                                            blurRadius: 5,
-                                            offset: Offset(0.0, 0.5))
-                                      ],
-                                      color: Colors.white,
-                                    ),
-                                    width: double.infinity,
-                                    height: 150,
+                                  margin: EdgeInsets.symmetric(
+                                      horizontal: 10, vertical: 10),
+                                  child: Text(
+                                    "Yeni ürünler ${index + 1}",
+                                    style: TextStyle(
+                                        color: Colors.grey[700],
+                                        fontWeight: FontWeight.w400),
                                   ),
-
+                                  alignment: FractionalOffset.bottomLeft,
+                                ),
+                                Container(
+                                  decoration: BoxDecoration(
+                                    boxShadow: <BoxShadow>[
+                                      BoxShadow(
+                                          color: Colors.black12,
+                                          blurRadius: 5,
+                                          offset: Offset(0.0, 0.5))
+                                    ],
+                                    color: Colors.white,
+                                  ),
+                                  width: double.infinity,
+                                  height: 150,
+                                ),
                               ],
                             );
                           },
@@ -244,13 +260,18 @@ class ProductScreen extends StatelessWidget {
               ],
             ),
           ),
-          Row(
-            children: <Widget>[
-              BottomBar(Icons.home, Colors.purple),
-              BottomBar(Icons.search, Colors.blueGrey),
-              BottomBar(Icons.person, Colors.blueGrey),
-              BottomBar(Icons.card_giftcard, Colors.blueGrey),
-            ],
+          Container(
+            decoration: BoxDecoration(
+                border:
+                    Border(top: BorderSide(color: Colors.black, width: 0.1))),
+            child: Row(
+              children: <Widget>[
+                BottomBar(Icons.home, Colors.purple),
+                BottomBar(Icons.search, Colors.blueGrey),
+                BottomBar(Icons.person, Colors.blueGrey),
+                BottomBar(Icons.card_giftcard, Colors.blueGrey),
+              ],
+            ),
           ),
         ],
       ),
