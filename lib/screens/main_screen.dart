@@ -35,14 +35,7 @@ class MainScreen extends StatelessWidget {
             Expanded(
               child: buildProductList(),
             ),
-            Row(
-              children: <Widget>[
-                BottomBar(Icons.home, Colors.purple),
-                BottomBar(Icons.search, Colors.blueGrey),
-                BottomBar(Icons.person, Colors.blueGrey),
-                BottomBar(Icons.card_giftcard, Colors.blueGrey),
-              ],
-            ),
+            BottomBar([1,0,0,0])
           ],
         ));
   }
